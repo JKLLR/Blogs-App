@@ -61,3 +61,77 @@ class Blog(db.Model):
     def __repr__(self):
         return f"Blog {self.post}"  
 
+
+class Comment(db.Model):
+    __tablename__ = "comments"
+    id = db.Column(db.Integer, primary_key=True)
+    comment = db.Column(db.Text(), nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey("users.id"))
+    blog_id = db.Column(db.Integer, db.ForeignKey("blogs.id"))
+
+    def save_comment(self):
+        db.session.add(self)
+        db.session.commit()
+
+    @classmethod
+    def get_comments(cls, blog_id):
+        comments = Comment.query.filter_by(blog_id=blog_id).all()
+        return comments
+
+    def __repr__(self):
+        return f"comment:{self.comment}"
+
+
+class Like(db.Model):
+    __tablename__ = "likes"
+
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey("users.id"))
+    blog_id = db.Column(db.Integer, db.ForeignKey("blogs.id"))
+
+    def save_like(self):
+        db.session.add(self)
+        db.session.commit()
+
+    @classmethod
+    def get_likes(cls, like_id):
+        like = Like.query.filter_by(blog_id=like_id).all()
+        return like
+
+    def __repr__(self):
+        return f"{self.user_id}:{self.blog_id}"
+
+
+class Dislike(db.Model):
+    __tablename__ = "dislikes"
+
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey("users.id"))
+    blog_id = db.Column(db.Integer, db.ForeignKey("blogs.id"))
+
+    def save_dislike(self):
+        db.session.add(self)
+        db.session.commit()
+
+    @classmethod
+    def get_dislikes(cls, dislike_id):
+        dislike = Dislike.query.filter_by(blog_id=dislike_id).all()
+        return dislike
+
+    def __repr__(self):
+        return f"{self.user_id}:{self.blog_id}"
+
+
+class Quote:
+    """
+    Qoute class to define the quote object
+    """
+
+    def __init__(self, author, id, quote, permalink):
+        self.author = author
+        self.id = id
+        self.quote = quote
+        self.permalink = permalink
+
+
+
