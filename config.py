@@ -5,7 +5,7 @@ class Config:
 
     # API_KEY = os.environ.get('API_KEY')
     SECRET_KEY = os.environ.get('SECRET_KEY')
-    
+   
 
 
 # class TestConfig(Config):
@@ -16,7 +16,7 @@ class ProdConfig(Config):
 
 
 class DevConfig(Config):
-    SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://jeff:1234/Blogs-app'
+    SQLALCHEMY_DATABASE_URI = "postgresql+psycopg2://jeff:12345678@localhost/blogsapp"
     DEBUG = True
 
 config_options = {
