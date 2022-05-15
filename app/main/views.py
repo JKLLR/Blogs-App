@@ -11,4 +11,4 @@ from . import main
 def index():
 
 
-    return render_template('main/index.html')
+    return render_template('index.html')
