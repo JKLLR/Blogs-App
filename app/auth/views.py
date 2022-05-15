@@ -4,6 +4,7 @@ from ..models import User
 from .forms import RegistrationForm, LoginForm
 from .. import db
 from flask_login import login_user, login_required, logout_user
+from ..email import mail_message
 
 
 @auth.route("/signup", methods=["GET", "POST"])
@@ -20,7 +21,9 @@ def signup():
         db.session.add(user)
         db.session.commit()
 
-        
+        mail_message(
+            "Welcome to 60 Seconds Impressions!", "email/welcome", user.email, user=user
+        )
 
         return redirect(url_for("auth.signin"))
     return render_template("auth/signup.html", registration_form=form, title=title)
