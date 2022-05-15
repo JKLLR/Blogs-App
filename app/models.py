@@ -1,6 +1,7 @@
 from app import db
 from flask_login import UserMixin
 from werkzeug.security import generate_password_hash,check_password_hash
+from datetime import datetime
 
 
 class User(UserMixin, db.Model):
@@ -12,7 +13,7 @@ class User(UserMixin, db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(255))
-    email = db.Column(db.String(255), unique=True, index=True)
+    email = db.Column(db.String(255), unique=True)
     bio = db.Column(db.String(255))
     profile_pic_path = db.Column(db.String(255))
     pass_secure = db.Column(db.String(255))
@@ -38,3 +39,25 @@ class User(UserMixin, db.Model):
 
     def __repr__(self):
         return f"User {self.username}"
+
+  
+class Blog(db.Model):
+    __tablename__ = "blogs"
+
+    id = db.Column(db.Integer, primary_key=True)
+    title = db.Column(db.String(255), nullable=False)
+    post = db.Column(db.Text(), nullable=False)
+    comment = db.relationship("Comment", backref="blog", lazy="dynamic")
+    user_id = db.Column(db.Integer, db.ForeignKey("users.id"))
+    time = db.Column(db.DateTime, default=datetime.utcnow)
+    category = db.Column(db.String(255), index=True, nullable=False)
+    like = db.relationship("Like", backref="blog", lazy="dynamic")
+    dislike = db.relationship("Dislike", backref="blog", lazy="dynamic")
+
+    def save_blog(self):
+        db.session.add(self)
+        db.session.commit()
+
+    def __repr__(self):
+        return f"Blog {self.post}"  
+
