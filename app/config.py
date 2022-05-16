@@ -8,7 +8,7 @@ class Config:
 
     API_URL = "http://quotes.stormconsultancy.co.uk/random.json"
 
-    SECRET_KEY = os.environ.get("SECRET_KEY")
+    SECRET_KEY = 'Flask WTF Secret Key'
     SQLALCHEMY_DATABASE_URI = (
         "postgresql+psycopg2://jeff:12345678@localhost:5432/blogsapp"
     )
