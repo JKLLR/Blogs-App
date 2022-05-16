@@ -1,5 +1,4 @@
-import urllib.request,json
-import requests 
+import requests, json
 
 api_url = None
 

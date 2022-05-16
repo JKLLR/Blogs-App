@@ -1,48 +1,55 @@
 {% extends 'base.html'%} {% import 'macros.html' as macro %} {% block content %}
 
 <div class="container">
-    <h2 class="text-center" id="posts" style="color: #040d21">All Blogs</h2>
-    <div class="blog-content">
-        <ul class="nav nav-pills nav-justified" role="tablist">
-            <li class="nav-item">
-                <a id="categories" class="nav-link" data-toggle="tab" href="#all"><strong>All Blogs</strong>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" id="categories" data-toggle="tab" href="#lifestyle">Lifestyle</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" id="categories" data-toggle="tab" href="#fitness">Fitness</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" id="categories" data-toggle="tab" href="#diy">Do It Yourself</a>
-            </li>
-        </ul>
-        <div class="tabbed-content">
-            <div class="tab-content">
-                <div class="container tab-pane active" id="all">
-                    <br />
-                    {{ macro.display(blogs) }}
-                </div>
-                <div class="container tab-pane fade" id="lifestyle">
-                    <br />
-                    {{ macro.display(lifestyle)}}
-                </div>
-                <div class="container tab-pane fade" id="fitness">
-                    <br />
-                    {{ macro.display(fitness) }}
-                </div>
-                <div class="container tab-pane fade" id="diy">
-                    <br />
-                    {{ macro.display(diy) }}
-                </div>
-            </div>
+  <h2 class="text-center" id="posts" style="color: #040d21">All Blogs</h2>
+  <div class="blog-content">
+    <ul class="nav nav-pills nav-justified" role="tablist">
+      <li class="nav-item">
+        <a id="categories" class="nav-link" data-toggle="tab" href="#all"
+          ><strong>All Blogs</strong>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" id="categories" data-toggle="tab" href="#lifestyle"
+          >Lifestyle</a
+        >
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" id="categories" data-toggle="tab" href="#fitness"
+          >Fitness</a
+        >
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" id="categories" data-toggle="tab" href="#diy"
+          >Do It Yourself</a
+        >
+      </li>
+    </ul>
+    <div class="tabbed-content">
+      <div class="tab-content">
+        <div class="container tab-pane active" id="all">
+          <br />
+          {{ macro.display(blogs) }}
         </div>
-        <blockquote class="quote-content">
-            <h4>Today's Quote</h4>
-            <p>{{quotes.quote}}</p>
-            <cite>{{quotes.author}}</cite>
-        </blockquote>
+        <div class="container tab-pane fade" id="lifestyle">
+          <br />
+          {{ macro.display(lifestyle)}}
+        </div>
+        <div class="container tab-pane fade" id="fitness">
+          <br />
+          {{ macro.display(fitness) }}
+        </div>
+        <div class="container tab-pane fade" id="diy">
+          <br />
+          {{ macro.display(diy) }}
+        </div>
+      </div>
     </div>
+    <blockquote class="quote-content">
+      <h4>Today's Quote</h4>
+      <p>{{quotes.quote}}</p>
+      <cite>{{quotes.author}}</cite>
+    </blockquote>
+  </div>
 </div>
 {% endblock%}

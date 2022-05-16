@@ -1,6 +1,6 @@
-from app import db
+from . import db, login_manager
+from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
-from werkzeug.security import generate_password_hash,check_password_hash
 from datetime import datetime
 
 
@@ -13,7 +13,7 @@ class User(UserMixin, db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(255))
-    email = db.Column(db.String(255), unique=True)
+    email = db.Column(db.String(255), unique=True, index=True)
     bio = db.Column(db.String(255))
     profile_pic_path = db.Column(db.String(255))
     pass_secure = db.Column(db.String(255))
@@ -40,7 +40,7 @@ class User(UserMixin, db.Model):
     def __repr__(self):
         return f"User {self.username}"
 
-  
+
 class Blog(db.Model):
     __tablename__ = "blogs"
 
@@ -59,7 +59,7 @@ class Blog(db.Model):
         db.session.commit()
 
     def __repr__(self):
-        return f"Blog {self.post}"  
+        return f"Blog {self.post}"
 
 
 class Comment(db.Model):
@@ -134,4 +134,6 @@ class Quote:
         self.permalink = permalink
 
 
-
+@login_manager.user_loader
+def load_user(user_id):
+    return User.query.get(user_id)

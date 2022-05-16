@@ -10,7 +10,7 @@ class Config:
 
     SECRET_KEY = os.environ.get("SECRET_KEY")
     SQLALCHEMY_DATABASE_URI = (
-        "postgresql+psycopg2://jeff:12345678@localhost/blogsapp"
+        "postgresql+psycopg2://jeff:12345678@localhost:5432/blogsapp"
     )
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
@@ -30,8 +30,7 @@ class ProdConfig(Config):
         Config: The parent configuration class with Generl configuration settings
     """
 
-    SQLALCHEMY_DATABASE_URI = os.getenv("DATABASE_URL")
-    
+
 
 class DevConfig(Config):
     """
