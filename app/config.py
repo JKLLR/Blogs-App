@@ -17,14 +17,13 @@ class Config:
 
 
 class ProdConfig(Config):
-    """
-    Production configuration child class
-    Args:
-        Config: The parent configuration class with Generl configuration settings
-    """
+   DATABASE_URL= os.getenv("DATABASE_URL")
 
 class DevConfig(Config):
     SQLALCHEMY_DATABASE_URI = os.getenv('SQLALCHEMY_DATABASE_URI')
     DEBUG = True
 
-config_options = {"development": DevConfig, "production": ProdConfig}
+config_options = {
+    "development": DevConfig,
+    "production": ProdConfig
+}
