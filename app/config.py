@@ -1,4 +1,3 @@
-from json import load
 import os
 from dotenv import load_dotenv, find_dotenv
 load_dotenv(find_dotenv())
@@ -17,7 +16,7 @@ class Config:
 
 
 class ProdConfig(Config):
-   DATABASE_URL= os.getenv("DATABASE_URL")
+   DATABASE_URL= os.getenv("DATABASE_URL").replace('postgres://', 'postgresql://')
 
 class DevConfig(Config):
     SQLALCHEMY_DATABASE_URI = os.getenv('SQLALCHEMY_DATABASE_URI')
