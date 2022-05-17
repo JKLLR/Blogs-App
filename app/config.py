@@ -1,26 +1,19 @@
+from json import load
 import os
+from dotenv import load_dotenv, find_dotenv
+load_dotenv(find_dotenv())
 
 
 class Config:
-    """
-    General parent configuration class
-    """
-
     API_URL = "http://quotes.stormconsultancy.co.uk/random.json"
-
-    SECRET_KEY = 'Flask WTF Secret Key'
-    SQLALCHEMY_DATABASE_URI = (
-        "postgresql+psycopg2://jeff:12345678@localhost:5432/blogsapp"
-    )
+    SECRET_KEY = os.getenv('SECRET_KEY')
     SQLALCHEMY_TRACK_MODIFICATIONS = False
-
     UPLOADED_PHOTOS_DEST = "app/static/photos"
-
     MAIL_SERVER = "smtp.googlemail.com"
     MAIL_PORT = 587
     MAIL_USE_TLS = True
-    MAIL_USERNAME = os.environ.get("MAIL_USERNAME")
-    MAIL_PASSWORD = os.environ.get("MAIL_PASSWORD")
+    MAIL_USERNAME = os.getenv("MAIL_USERNAME")
+    MAIL_PASSWORD = os.getenv("MAIL_PASSWORD")
 
 
 class ProdConfig(Config):
@@ -30,17 +23,8 @@ class ProdConfig(Config):
         Config: The parent configuration class with Generl configuration settings
     """
 
-
-
 class DevConfig(Config):
-    """
-    Development  configuration child class
-
-    Args:
-        Config: The parent configuration class with General configuration settings
-    """
-
+    SQLALCHEMY_DATABASE_URI = os.getenv('SQLALCHEMY_DATABASE_URI')
     DEBUG = True
-
 
 config_options = {"development": DevConfig, "production": ProdConfig}
