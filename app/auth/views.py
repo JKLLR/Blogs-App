@@ -21,7 +21,6 @@ def signup():
         db.session.add(user)
         db.session.commit()
 
-        mail_message("Devin Blogs!", "email/welcome", user.email, user=user)
 
         return redirect(url_for("auth.signin"))
     return render_template("auth/signup.html", registration_form=form, title=title)
